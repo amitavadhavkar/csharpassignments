@@ -7,7 +7,6 @@ namespace LeaveTracker
 {
     public class Program
     {
-        
         class Options
         {
             [Option('c', "employee-id", Required = true, HelpText = "Employee Id.")]
@@ -19,6 +18,7 @@ namespace LeaveTracker
 
         static void Main(string[] args)
         {
+
         }
         static void RunOptions(Options o)
         {
