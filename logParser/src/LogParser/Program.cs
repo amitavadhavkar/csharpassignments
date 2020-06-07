@@ -36,8 +36,14 @@ namespace LogToCsv
                 .WithNotParsed(errs => HandleParseError(errs));
 
                 DirectoryInfo rootDirInfo = new DirectoryInfo(InputArguments.logDir);
-                DirectoryWalker.WalkDirectoryTree(rootDirInfo);
-                Console.WriteLine("Generated csv: " + InputArguments.absoluteCsvFile);
+                if (DirectoryWalker.WalkDirectoryTree(rootDirInfo, true))
+                {
+                    Console.WriteLine("Generated csv: " + InputArguments.absoluteCsvFile);
+                }
+                else
+                {
+                    Console.WriteLine("Error in generating csv");
+                }                
             }
             catch (Exception e)
             {

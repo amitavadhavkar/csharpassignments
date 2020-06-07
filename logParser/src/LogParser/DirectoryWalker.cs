@@ -4,11 +4,11 @@ namespace LogToCsv
 {
     public class DirectoryWalker
     {
-        public static void WalkDirectoryTree(System.IO.DirectoryInfo root)
+        public static bool WalkDirectoryTree(System.IO.DirectoryInfo root, bool appendContent)
         {
             System.IO.FileInfo[] files = null;
             System.IO.DirectoryInfo[] subDirs = null;
-
+            bool canWalk = true;
             // First, process all the files directly under this folder
             try
             {
@@ -17,11 +17,15 @@ namespace LogToCsv
             catch (UnauthorizedAccessException e)
             {
                 Console.WriteLine(e.Message);
+                canWalk = false;
+                return canWalk;
             }
 
             catch (System.IO.DirectoryNotFoundException e)
             {
                 Console.WriteLine(e.Message);
+                canWalk = false;
+                return canWalk;
             }
 
             if (files != null)
@@ -29,7 +33,10 @@ namespace LogToCsv
                 foreach (System.IO.FileInfo fi in files)
                 {
                     // Console.WriteLine(fi.FullName);
-                    LogToCsvConverter.appendCsv(fi.FullName);
+                    if (appendContent)
+                    {
+                        LogToCsvConverter.appendCsv(fi.FullName);
+                    }
                 }
 
                 // Now find all the subdirectories under this directory.
@@ -38,9 +45,10 @@ namespace LogToCsv
                 foreach (System.IO.DirectoryInfo dirInfo in subDirs)
                 {
                     // Resursive call for each subdirectory.
-                    WalkDirectoryTree(dirInfo);
+                    WalkDirectoryTree(dirInfo, appendContent);
                 }
             }
+            return canWalk;
         }
     }
 }
