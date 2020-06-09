@@ -13,7 +13,7 @@ namespace LeaveTracker
 
         private static Dictionary<Int32, List<Int32>> managerEmployees
         = new Dictionary<Int32, List<Int32>>();
-        void loadEmployees()
+        public static void LoadEmployees()
         {
             TextFieldParser parser = new TextFieldParser(InputArguments.IN_FILE);
             parser.SetDelimiters(new string[] { "," });
@@ -68,12 +68,12 @@ namespace LeaveTracker
             }
         }
 
-        public Dictionary<Int32, string> getEmployees()
+        public static Dictionary<Int32, string> GetEmployees()
         {
             return null;
         }
 
-        public string getEmployeeName(Int32 employeeId)
+        public static string GetEmployeeName(Int32 employeeId)
         {
             string name;
             if (!employees.TryGetValue(employeeId, out name))
@@ -86,7 +86,7 @@ namespace LeaveTracker
             }
         }
 
-        public Int32 getManagerId(Int32 employeeId)
+        public static Int32 GetManagerId(Int32 employeeId)
         {
             Int32 managerId;
             if (!employeeManagers.TryGetValue(employeeId, out managerId))
@@ -99,7 +99,7 @@ namespace LeaveTracker
             }
         }
 
-        public List<Int32> getEmployeesForManagerId(Int32 managerId)
+        public static List<Int32> GetEmployeesForManagerId(Int32 managerId)
         {
             List<Int32> employeeIds;
             if (!managerEmployees.TryGetValue(managerId, out employeeIds))

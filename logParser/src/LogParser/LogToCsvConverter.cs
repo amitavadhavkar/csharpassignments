@@ -12,7 +12,7 @@ namespace LogToCsv
         static string patternLinePart = @"(" + InputArguments.filterLogLevel + @")\s+[:]";
         static Regex rg = new Regex(pattern);
         static Regex rgLevel = new Regex(patternLevel);
-        public static bool appendCsv(String fileName)
+        public static bool AppendCsv(String fileName)
         {
             string csvFileName = InputArguments.absoluteCsvFile;
             string monthStr, dateStr, hourStr, minuteStr, secondStr, logLevel, linePart;

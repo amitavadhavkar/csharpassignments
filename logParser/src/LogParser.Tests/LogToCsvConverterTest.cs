@@ -15,7 +15,7 @@ namespace LogToCsv.Tests
             String fileName = "csv-" + ".csv";
             InputArguments.absoluteCsvFile = Directory.GetCurrentDirectory()
             + "../../../../../../out/csvoutdir/" + fileName;
-            LogToCsvConverter.appendCsv(Directory.GetCurrentDirectory() 
+            LogToCsvConverter.AppendCsv(Directory.GetCurrentDirectory() 
             + "../../../../../../in/logs/2020_03/app.log");
             var result = File.Exists(InputArguments.absoluteCsvFile)
                             && 
@@ -32,7 +32,7 @@ namespace LogToCsv.Tests
             String fileName = "csv-" + ".csv";
             InputArguments.absoluteCsvFile = Directory.GetCurrentDirectory()
             + "../../../../../../out/csvoutdir/" + fileName;
-            LogToCsvConverter.appendCsv(Directory.GetCurrentDirectory() 
+            LogToCsvConverter.AppendCsv(Directory.GetCurrentDirectory() 
             + "../../../../../../in/logs/2020_03/appxxx.log");
             var result = File.Exists(InputArguments.absoluteCsvFile)
                             && 

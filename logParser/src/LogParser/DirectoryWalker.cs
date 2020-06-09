@@ -35,7 +35,7 @@ namespace LogToCsv
                     // Console.WriteLine(fi.FullName);
                     if (appendContent)
                     {
-                        LogToCsvConverter.appendCsv(fi.FullName);
+                        LogToCsvConverter.AppendCsv(fi.FullName);
                     }
                 }
 
