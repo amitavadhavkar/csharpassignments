@@ -46,7 +46,7 @@ namespace LeaveTracker
                         {
                             try
                             {
-                                id = Int32.Parse(fields[0])
+                                id = Int32.Parse(fields[0]);
                             }
                             catch (Exception e)
                             {
