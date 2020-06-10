@@ -11,7 +11,7 @@ namespace LeaveTracker
 
         public static void SaveLeaves()
         {
-            using (System.IO.StreamWriter leavesFile = 
+            using (System.IO.StreamWriter leavesFile =
             new StreamWriter(InputArguments.OUT_FILE, false))
             {
                 foreach (Leave leave in leaves)
@@ -251,6 +251,46 @@ namespace LeaveTracker
             catch (Exception e)
             {
                 throw new Exception("Invalid leave status in search, aborting", e);
+            }
+        }
+
+        public static void UpdateLeave(string employeeId, string leaveRecordId, string status)
+        {
+            Int32 id;
+            LeaveStatus leaveStatus;
+            try
+            {
+                id = Int32.Parse(employeeId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Invalid employee Id:" + employeeId, e);
+            }
+            Int32 leaveRecId;
+            try
+            {
+                leaveRecId = Int32.Parse(leaveRecordId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Invalid leave record Id:" + leaveRecordId, e);
+            }
+            try
+            {
+                leaveStatus = (LeaveStatus)Enum.Parse(typeof(LeaveStatus), status, true);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Invalid leave status.", e);
+            }
+            string managerName = EmployeeCatalog.GetEmployeeName(id);
+            foreach (Leave leave in leaves)
+            {
+                if (leave.manager.Equals(managerName)
+                && leave.id == leaveRecId)
+                {
+                    leave.leaveStatus = leaveStatus;
+                }
             }
         }
     }

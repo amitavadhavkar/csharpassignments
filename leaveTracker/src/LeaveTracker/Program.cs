@@ -30,16 +30,24 @@ namespace LeaveTracker
             Console.WriteLine("SearchLeavesByStatus:");
             Console.WriteLine("Quit:");
             string choice = Console.ReadLine();
+            string leaveRecordId;
+            string assignTo;
+            string title;
+            string description;
+            string startDate;
+            string endDate;
+            string status;
+
             while (!choice.Equals("Quit"))
             {
                 switch (choice)
                 {
                     case "CreateLeave":
-                        string assignTo = Console.ReadLine();
-                        string title = Console.ReadLine();
-                        string description = Console.ReadLine();
-                        string startDate = Console.ReadLine();
-                        string endDate = Console.ReadLine();
+                        assignTo = Console.ReadLine();
+                        title = Console.ReadLine();
+                        description = Console.ReadLine();
+                        startDate = Console.ReadLine();
+                        endDate = Console.ReadLine();
                         LeaveService.CreateLeave
                         (employeeId, assignTo, title, description, startDate, endDate);
                         break;
@@ -47,13 +55,16 @@ namespace LeaveTracker
                         LeaveService.ListMyLeaves(employeeId);
                         break;
                     case "UpdateLeave":
+                        leaveRecordId = Console.ReadLine();
+                        status = Console.ReadLine();
+                        LeaveService.UpdateLeave(employeeId, leaveRecordId, status);
                         break;
                     case "SearchLeavesByTitle":
                         title = Console.ReadLine();
                         LeaveService.SearchLeavesByTitle(title);
                         break;
                     case "SearchLeavesByStatus":
-                        string status = Console.ReadLine();
+                        status = Console.ReadLine();
                         LeaveService.SearchLeavesByStatus(status);
                         break;
                     default:
