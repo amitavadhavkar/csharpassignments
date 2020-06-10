@@ -44,12 +44,17 @@ namespace LeaveTracker
                         (employeeId, assignTo, title, description, startDate, endDate);
                         break;
                     case "ListMyLeave":
+                        LeaveService.ListMyLeaves(employeeId);
                         break;
                     case "UpdateLeave":
                         break;
                     case "SearchLeavesByTitle":
+                        title = Console.ReadLine();
+                        LeaveService.SearchLeavesByTitle(title);
                         break;
                     case "SearchLeavesByStatus":
+                        string status = Console.ReadLine();
+                        LeaveService.SearchLeavesByStatus(status);
                         break;
                     default:
                         Console.WriteLine("Invalid choice");

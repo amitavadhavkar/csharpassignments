@@ -64,7 +64,7 @@ namespace LeaveTracker
             }
             catch (Exception e)
             {
-                Console.WriteLine("Invalid employees.csv");
+                Console.WriteLine("Invalid employees.csv. Reason:{}", e.Message);
             }
         }
 

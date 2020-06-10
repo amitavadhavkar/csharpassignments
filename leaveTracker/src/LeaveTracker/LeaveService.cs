@@ -50,7 +50,7 @@ namespace LeaveTracker
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine("Invalid Id in record, skipping line");
+                                Console.WriteLine("Invalid Id in record, skipping line. Reason: {}", e.Message);
                                 continue;
                             }
                             try
@@ -59,7 +59,7 @@ namespace LeaveTracker
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine("Invalid start date in record, skipping line");
+                                Console.WriteLine("Invalid start date in record, skipping line. Reason: {}", e.Message);
                                 continue;
                             }
                             try
@@ -68,7 +68,7 @@ namespace LeaveTracker
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine("Invalid end date in record, skipping line");
+                                Console.WriteLine("Invalid end date in record, skipping line. Reason: {}", e.Message);
                                 continue;
                             }
                             try
@@ -77,7 +77,7 @@ namespace LeaveTracker
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine("Invalid leave status in record, skipping line");
+                                Console.WriteLine("Invalid leave status in record, skipping line. Reason: {}", e.Message);
                                 continue;
                             }
                             Leave leave = new Leave(
@@ -100,7 +100,7 @@ namespace LeaveTracker
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Error parsing leaves.csv");
+                    throw new Exception("Error parsing leaves.csv.", e);
                 }
             }
             else
@@ -127,7 +127,7 @@ namespace LeaveTracker
             }
             catch (Exception e)
             {
-                throw new Exception("Invalid employee Id:" + employeeId);
+                throw new Exception("Invalid employee Id:" + employeeId, e);
 
             }
             if (null == managerName || managerName.Length == 0)
@@ -152,7 +152,7 @@ namespace LeaveTracker
             }
             catch (Exception e)
             {
-                throw new Exception("Invalid start date:" + startDate);
+                throw new Exception("Invalid start date:" + startDate, e);
             }
             if (null == endDate || endDate.Length == 0)
             {
@@ -164,7 +164,7 @@ namespace LeaveTracker
             }
             catch (Exception e)
             {
-                throw new Exception("Invalid end date:" + endDate);
+                throw new Exception("Invalid end date:" + endDate, e);
             }
             string employeeName = EmployeeCatalog.GetEmployeeName(id);
             if (employeeName == null)
@@ -198,7 +198,7 @@ namespace LeaveTracker
             leaves.Add(newLeave);
         }
 
-        public void ListMyLeaves(string employeeId)
+        public static void ListMyLeaves(string employeeId)
         {
             Int32 id;
             try
@@ -207,7 +207,7 @@ namespace LeaveTracker
             }
             catch (Exception e)
             {
-                throw new Exception("Invalid employee Id:" + employeeId);
+                throw new Exception("Invalid employee Id:" + employeeId, e);
 
             }
             string employeeName = EmployeeCatalog.GetEmployeeName(id);
@@ -224,7 +224,7 @@ namespace LeaveTracker
             }
         }
 
-        public void SearchLeavesByTitle(String title)
+        public static void SearchLeavesByTitle(String title)
         {
             foreach (Leave leave in leaves)
             {
@@ -234,7 +234,7 @@ namespace LeaveTracker
                 }
             }
         }
-        public void SearchLeavesByStatus(String leaveStatus)
+        public static void SearchLeavesByStatus(String leaveStatus)
         {
             try
             {
@@ -250,7 +250,7 @@ namespace LeaveTracker
             }
             catch (Exception e)
             {
-                throw new Exception("Invalid leave status in search, aborting");
+                throw new Exception("Invalid leave status in search, aborting", e);
             }
         }
     }
