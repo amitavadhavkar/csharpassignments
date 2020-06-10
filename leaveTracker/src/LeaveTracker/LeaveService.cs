@@ -22,18 +22,18 @@ namespace LeaveTracker
         }
         public static void LoadLeaves()
         {
-            TextFieldParser parser = new TextFieldParser(InputArguments.OUT_FILE);
-            parser.SetDelimiters(new string[] { "," });
-            parser.HasFieldsEnclosedInQuotes = false;
-            Int32 id;
-            DateTime startDate;
-            DateTime endDate;
-            LeaveStatus leaveStatus;
-
-            if (File.Exists(InputArguments.OUT_FILE)
-                    &&
-                (new FileInfo(InputArguments.OUT_FILE)).Length > 0)
+            if (File.Exists(InputArguments.OUT_FILE) &&
+            (new FileInfo(InputArguments.OUT_FILE)).Length > 0)
             {
+                TextFieldParser parser = new TextFieldParser(InputArguments.OUT_FILE);
+                parser.SetDelimiters(new string[] { "," });
+                parser.HasFieldsEnclosedInQuotes = false;
+                Int32 id;
+                DateTime startDate;
+                DateTime endDate;
+                LeaveStatus leaveStatus;
+
+
                 try
                 {
                     // Skip over header line.
@@ -103,11 +103,8 @@ namespace LeaveTracker
                     throw new Exception("Error parsing leaves.csv.", e);
                 }
             }
-            else
-            {
-                //ignore, file is not yet formed
-            }
         }
+
 
         public static void CreateLeave(
             string employeeId,
@@ -180,7 +177,7 @@ namespace LeaveTracker
             string managerNm = EmployeeCatalog.GetEmployeeName(managerId);
             if (!managerName.Equals(managerNm))
             {
-                throw new Exception("Wrong manager name input:" + managerName);
+                throw new Exception("Wrong manager name input:" + managerName + ", expected: " + managerNm);
             }
 
             Int32 leaveRecordId = leaves.Count + 1;
